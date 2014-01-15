@@ -216,6 +216,20 @@ Różne klasy instancji danych wejściowych.
 Algorytm losowy, niezależnie od rodzaju danych wejściowych oraz ilości iteracji, osiąga średnio podobne wyniki. Jest to spowodowane brakiem poprawy algorytmu z upływem czasu. Natomiast ACO w kolejnych iteracjach zwraca wynik dążący do optimum.
 Metaheurystyka w zależności od klasy instancji zwraca wynik procentowo?
 
+\begin{tabular}{rrrll}
+\toprule
+Iteracja & ACO & RND  & opt/ACO(\%) & opt/RND(\%) \\
+\midrule
+50	& 3,796.33	& 4,294.33	& 68.03	& 60.14 \\
+1000	& 3,192.15	& 4,419.17	& 80.91	& 58.44 \\
+2000	& 3,089.85	& 4,388.67	& 83.59	& 58.85 \\
+3000	& 3,101.63	& 4,331.83	& 83.27	& 59.62 \\
+4000	& 3,077.53	& 4,458.83	& 83.92	& 57.92 \\
+5000	& 3,016.63	& 4,238.50	& 85.61	& 60.93 \\
+\bottomrule
+\end{tabular}
+
+
 \newpage
 \subsubsection{Grupa instancji 2}
 Różne wartości parametru $\beta$.
@@ -265,8 +279,8 @@ Różne wartości parametru $\alpha$.
 
 \begin{figure}[h]
     \centering
-    \includegraphics{./figures/inst01_rnd_beta.pdf}
-    \caption{$ \alpha = \{ 0.1, 0.25, 0.5, 0.75 \} $}
+    \includegraphics{./figures/inst01_rnd_alpha.pdf}
+    \caption{$ \alpha = \{ 0.0, 0.1, 0.25, 0.5, 0.75 \} $}
 \end{figure}
 
 \end{document}
