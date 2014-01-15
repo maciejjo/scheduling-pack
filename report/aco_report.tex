@@ -83,6 +83,7 @@ Rozwiązaniem generowanym przez mrówkę jest łańcuch wszystkich wierzchołkó
 
 Przed uruchomieniam właściwego algorytmu, początkowa ilość feromonu na każdej ścieżce przyjmuje bardzo małą wartość, w naszej implementacji przyjęliśmy $ \tau_0 = 0.001 $ 
 
+\subsubsection{State Transition Rule}
 Każda mrówka wybierając drogę stosuję regułę zmiany stanu (State Transition Rule), którą obrazuje poniższy wzór:\\
 %wzory do wklejenia
 \begin{equation}
@@ -94,16 +95,16 @@ Każda mrówka wybierając drogę stosuję regułę zmiany stanu (State Transiti
 \end{equation} \\
 gdzie:
 \begin{itemize}
-  \item (r,u) - łuk od wierzchołka r do u
-  \item J(r) - zbiór wierzchołków dostępnych w punkcie decyzyjnym r
+  \item $ (r,u) $ - łuk od wierzchołka r do u
+  \item $ J(r) $ - zbiór wierzchołków dostępnych w punkcie decyzyjnym r
   \item $ \tau (r,u) $ - ilość feromonu na łuku (r,u)
   \item $ \eta (r,u) $ - atrakcyjność łuku (r,u), która w przypadku naszego problemu zdefiniowana jest jako odwrotność długości operacji u
   \item $ \beta $ - parametr kontrolujący wpływ atrakcyjności
-  \item $ q $ - losowa liczba z przedziału \langle 0;1 \rangle 
-  \item $ q_0 $ - zdefiniowany parametr przyjmujący wartości z przedziału \langle 0;1 \rangle
-  \item $ S $ - zmienna losowa wybierana zgodnia z rozkładem prawdopodobieństwa opisanym wzorem (2)
+  \item $ q $ - losowa liczba z przedziału $ \langle 0;1 \rangle $ 
+  \item $ q_0 $ - zdefiniowany parametr przyjmujący wartości z przedziału $ \langle 0;1 \rangle $
+  \item $ S $ - zmienna losowa wybierana zgodnia z rozkładem prawdopodobieństwa opisanym wzorem (2). 
 \end{itemize}
-
+\\
 \begin{equation}
  P(r,s) = \left\{ 
   \begin{array}{l l}
@@ -114,12 +115,35 @@ gdzie:
   \end{array} \right.
 \end{equation}
 
-dokonuje losowo, a wpływ pozostawionych feromonów uzyskaliśmy stosując
-psuedo-ruletkę, która zwiększa prawdopodobieństwo wylosowania danej drogi
-przydzielając “pasmo dostępności” danej drogi w losowanym zakresie w zależności
-od aktualnej wartości feromonu.  W rozwiązaniu przyjęto także element parowania
-pozostawionych feromonów, którą można wygodnie regulować za pomocą współczyniika
-parowania.
+Powyższa metoda wyboru nosi nazwę pseudoruletki, której zasada działania opiera się na przydzieleniu wartości procentowej koła ruletki, odpowiadającej iloczynowi ilości feromonu i atrakcyjności. Po zakręceniu kołem, które jest równoważne wylosowaniu liczby, wybierany jest następny wierzchołek na drodze mrówki.
+
+\subsubsection{Aktualizacja wartości feromonów}
+W algorytmie stosujemy dwie strategie aktualizacji feromonów: \\
+\begin{enumerate}
+  \item lokalna (local updating rule) - w czasie konstruowania ścieżki mrówka modyfikuje ilosć feromonu stosując się do poniższego wzoru:\\
+  \[ \tau (r,s) \leftarrow (1 - \rho) \cdot \tau (r,s) + \rho \cdot \tau_0  \] \\
+  gdzie:
+  \begin{itemize}
+  \item $ \rho $ - współczynnik parowania feromonu (z przedziału $ (0;1) $)
+\end{itemize}
+
+  \item globalna (global updating rule) - gdy wszystkie mrówki danej populacji dotrą do celu (osiągną końcowy wierzchołek grafu) wartość feromonu jest aktualizowana zgodnie ze wzorem:\\
+   \[ \tau (r,s) \leftarrow (1 - \alpha) \cdot \tau (r,s) + \alpha \cdot \Delta \tau (r,s)  \] \\
+  gdzie:
+  \begin{itemize}
+  \item $ \alpha $ - parametr zaniku feromonu
+  \item $ \Delta \tau (r,s) $ - przedstawia się wzorem: \\
+  \begin{equation}
+ \Delta \tau (r,s) = \left\{ 
+  \begin{array}{l l}
+    (L_{gb})^{-1} , & \quad \text{jeśli $(r,s) \in$ najlepsza ścieżka}\\
+    0, & \quad \text{w przeciwnym razie}
+  \end{array} \right.
+\end{equation}
+  gdzie:
+  \item $ L_{gb}$ - długość najlepszej ścieżki ($C_{max}$)
+\end{itemize}
+\end{enumerate}
 
 Poszukiwanie rozwiązania opiera się na pętli z warunkiem wykonania wszystkich
 zleceń, która wykonuje następujące kroki:
