@@ -145,26 +145,29 @@ W algorytmie stosujemy dwie strategie aktualizacji feromonów: \\
 \end{itemize}
 \end{enumerate}
 
-Poszukiwanie rozwiązania opiera się na pętli z warunkiem wykonania wszystkich
-zleceń, która wykonuje następujące kroki:
-\begin{enumerate}
-    \item dla każdej z maszyn: jeżeli maszyna jest bezczynna to na podstawie
-      tablicy iteratorów znajdź zadanie przeznaczone dla tej maszyny (i zapisz
-      czas jego rozpoczęcia) lub pozostań w stanie bezczynności,
-    \item znajdź czas zadania, które kończy się najwcześniej i zapisz w zmiennej
-      $t$,
-    \item wykonaj $T += t$ i dla każdego aktualnie przetwarzanego zadania
-      zmniejsz pozostały czas wykonania o $t$,
-    \item jeżeli istnieje zadanie o pozostałym czasie wykonania równym 0, to
-      usuń je z maszyny i przesuń iterator zlecenia o 1 w prawo.
-\end{enumerate}
-
-Po zakończeniu powyższej pętli długość uszeregowania znajduje się w zmiennej
-$T$. 
+\subsection{Instancje testowe}
+Każda znajdująca się poniżej instancja sterowana jest następującymi parametrami: $ \rho, \alpha, q_0, \tau_0, \beta $.
+Klasy instancji podzieliliśmy na 4 grupy w zależności od rodzaju danych wejściowych: losowe, rosnące, malejące, v-kształtne.
 
 
+\subsubsection{Instancja 1}
 
+\begin{tabular}{|r|l|}
+  \hline
+  klasa instancji & losowa  \\
+  liczba zadań & 50 \\
+  czasy operacji & $ \langle 5;100 \rangle $  \\
+  liczba mrówek & 10 \\
+  liczba pokoleń & 5000 \\
+  $ \rho $ & 0,01 \\
+  $ \alpha $ & 0,1 \\
+  $ q_0 $ & 0,8 \\
+  $ \tau_0 $ & 0,001 \\
+  $ \beta $ & 2 \\
+  \hline
+\end{tabular}
 
+\subsubsection{Instancja 2}
 
 
 
