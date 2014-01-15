@@ -94,12 +94,25 @@ Każda mrówka wybierając drogę stosuję regułę zmiany stanu (State Transiti
 \end{equation} \\
 gdzie:
 \begin{itemize}
-  \item a  
-  \item b
-  \item c
+  \item (r,u) - łuk od wierzchołka r do u
+  \item J(r) - zbiór wierzchołków dostępnych w punkcie decyzyjnym r
+  \item $ \tau (r,u) $ - ilość feromonu na łuku (r,u)
+  \item $ \eta (r,u) $ - atrakcyjność łuku (r,u), która w przypadku naszego problemu zdefiniowana jest jako odwrotność długości operacji u
+  \item $ \beta $ - parametr kontrolujący wpływ atrakcyjności
+  \item $ q $ - losowa liczba z przedziału \langle 0;1 \rangle 
+  \item $ q_0 $ - zdefiniowany parametr przyjmujący wartości z przedziału \langle 0;1 \rangle
+  \item $ S $ - zmienna losowa wybierana zgodnia z rozkładem prawdopodobieństwa opisanym wzorem (2)
 \end{itemize}
 
-
+\begin{equation}
+ P(r,s) = \left\{ 
+  \begin{array}{l l}
+    \frac{[\tau (r,s)] \cdot [\eta (r,s)^\beta]}{\sum_{u \in J(r)} {[\tau (r,u)]
+    \cdot [\eta (r,u)^\beta]}},
+    & \quad \text{jeśli }s \in J(r)\\
+     0, & \quad \text{w przeciwnym razie}
+  \end{array} \right.
+\end{equation}
 
 dokonuje losowo, a wpływ pozostawionych feromonów uzyskaliśmy stosując
 psuedo-ruletkę, która zwiększa prawdopodobieństwo wylosowania danej drogi
@@ -128,15 +141,7 @@ $T$.
 
 
 
-\begin{equation}
- P(r,s) = \left\{ 
-  \begin{array}{l l}
-    \frac{[\tau (r,s)] \cdot [\eta (r,s)^\beta]}{\sum_{u \in J(r)} {[\tau (r,u)]
-    \cdot [\eta (r,u)^\beta]}},
-    & \quad \text{jeśli }s \in J(r)\\
-     0, & \quad \text{w przeciwnym razie}
-  \end{array} \right.
-\end{equation}
+
 
 
 \end{document}
