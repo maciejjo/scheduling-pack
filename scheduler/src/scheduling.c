@@ -28,8 +28,8 @@ float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct o
 
 
   for(int iter = 0; iter < iter_no; iter++) {
-    if(!iter%1000)
-      printf("%dk...\n", iter);
+    if(!(iter%1000))
+      printf("%dk...\n", (iter/1000));
 
   int **solutions_array = malloc(ants_no * sizeof(int *));
   for(int i = 0; i < ants_no; i++) {
