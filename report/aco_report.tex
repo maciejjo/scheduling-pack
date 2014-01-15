@@ -73,8 +73,34 @@ przykład umieszczono poniżej:\\
 \begin{center}
     \includegraphics [scale=0.4]{./figures/pic01.png}\\
 \end{center}
-Informacje o ilości feromonów utrzymywane są w macierzach NxN (N - liczba
-zadań), odpowiadających poszczególnym maszynom. Każda mrówka wyboru drogi,
+Każdemu wierzchołkowi grafu przyporządkowana jest jedna operacja, każda operacja zaś posiada informacje o maszynie i numerze zadania.
+Zależności pomiędzy kolejnością wykonania operacji reprezentują łuki między nimi, ponadto graf posiado dwa dodatkowe wierzchołki - początkowy i końcowy - które pozwalają przypisać pierwszej i ostatniej operacji feromon. Dzięki takiej reprezentacji problemu możemy korzystać z wzorów przeznaczonych dla algorytmu TSP z drobnymi modyfikacjami.
+
+Informacje o ilości feromonów utrzymywane są w macierzy NxN (N - liczba
+operacji). 
+Rozwiązaniem generowanym przez mrówkę jest łańcuch wszystkich wierzchołków zachowujący zależnosci między operacjami w zadaniu.
+(sortowanie topologiczne) Przykładowy łańcuch: [0 1 4 2 7 5 8 3 6 9 10].
+
+Przed uruchomieniam właściwego algorytmu, początkowa ilość feromonu na każdej ścieżce przyjmuje bardzo małą wartość, w naszej implementacji przyjęliśmy $ \tau_0 = 0.001 $ 
+
+Każda mrówka wybierając drogę stosuję regułę zmiany stanu (State Transition Rule), którą obrazuje poniższy wzór:\\
+%wzory do wklejenia
+\begin{equation}
+ s = \left\{ 
+  \begin{array}{l l}
+    arg\ max_{u \in J(r)}, & \quad \text{jeśli $q\leq q_0$}\\
+    S, & \quad \text{w przeciwnym razie}
+  \end{array} \right.
+\end{equation} \\
+gdzie:
+\begin{itemize}
+  \item a 
+  \item b
+  \item c
+\end{itemize}
+
+
+
 dokonuje losowo, a wpływ pozostawionych feromonów uzyskaliśmy stosując
 psuedo-ruletkę, która zwiększa prawdopodobieństwo wylosowania danej drogi
 przydzielając “pasmo dostępności” danej drogi w losowanym zakresie w zależności
@@ -100,14 +126,7 @@ Po zakończeniu powyższej pętli długość uszeregowania znajduje się w zmien
 $T$. 
 
 
-%wzory do wklejenia
-\begin{equation}
- s = \left\{ 
-  \begin{array}{l l}
-    arg\ max_{u \in J(r)}, & \quad \text{jeśli $q\leq q_0$}\\
-    S, & \quad \text{w przeciwnym razie}
-  \end{array} \right.
-\end{equation}
+
 
 \begin{equation}
  P(r,s) = \left\{ 
@@ -118,5 +137,6 @@ $T$.
      0, & \quad \text{w przeciwnym razie}
   \end{array} \right.
 \end{equation}
+
 
 \end{document}
