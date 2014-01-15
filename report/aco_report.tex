@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{epsf} 
+\usepackage{float}
 \nonstopmode
 
 \title{Flow-Shop Scheduling\\Laboratorium Optymalizacji Kombinatorycznej}
@@ -187,46 +188,33 @@ Różne klasy instancji danych wejściowych.
   czasy operacji & $ \langle 5;100 \rangle $  \\
   liczba mrówek & 10 \\
   liczba pokoleń & 5000 \\
-  $ \rho $ & 0,01 \\
-  $ \alpha $ & 0,1 \\
-  $ q_0 $ & 0,8 \\
-  $ \tau_0 $ & 0,001 \\
+  $ \rho $ & 0.01 \\
+  $ \alpha $ & 0.1 \\
+  $ q_0 $ & 0.8 \\
+  $ \tau_0 $ & 0.001 \\
   $ \beta $ & 2 \\
   \hline
 \end{tabular}
 \end{center}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics{./figures/inst01_rnd_smooth.pdf}
-    \caption{Losowe}
-\end{figure}
+\begin{center}
+\\
+\includegraphics{./figures/inst01_rnd_smooth.pdf}
+\caption{losowy}
 
-Wyczerpujący opis wykresu
+\includegraphics{./figures/inst02_asc_smooth.pdf}
+\caption{rosnący}
+\\
+\includegraphics{./figures/inst03_dsc_smooth.pdf}
+\caption{malejące}
+\\
+\includegraphics{./figures/inst04_vsh_smooth.pdf}
+\caption{v-kształtne}
+\\
+\end{center}
 
-
-\newpage
-\begin{figure}[h]
-    \centering
-    \includegraphics{./figures/inst02_asc_smooth.pdf}
-    \caption{Rosnące}
-\end{figure}
-
-\newpage
-\begin{figure}[h]
-    \centering
-    \includegraphics{./figures/inst03_dsc_smooth.pdf}
-    \caption{Malejące}
-\end{figure}
-
-
-\newpage
-\begin{figure}[h]
-    \centering
-    \includegraphics{./figures/inst04_vsh_smooth.pdf}
-    \caption{V-kształtne}
-\end{figure}
-
+Algorytm losowy, niezależnie od rodzaju danych wejściowych oraz ilości iteracji, osiąga średnio podobne wyniki. Jest to spowodowane brakiem poprawy algorytmu z upływem czasu. Natomiast ACO w kolejnych iteracjach zwraca wynik dążący do optimum.
+Metaheurystyka w zależności od klasy instancji zwraca wynik procentowo?
 
 \newpage
 \subsubsection{Grupa instancji 2}
@@ -240,17 +228,17 @@ Różne wartości parametru $\beta$.
   czasy operacji & $ \langle 5;100 \rangle $  \\
   liczba mrówek & 10 \\
   liczba pokoleń & 5000 \\
-  $ \rho $ & 0,01 \\
-  $ \alpha $ & 0,1 \\
-  $ q_0 $ & 0,8 \\
-  $ \tau_0 $ & 0,001 \\
+  $ \rho $ & 0.01 \\
+  $ \alpha $ & 0.1 \\
+  $ q_0 $ & 0.8 \\
+  $ \tau_0 $ & 0.001 \\
   \hline
 \end{tabular}
 \end{center}
 
 \begin{figure}[h]
     \centering
-   % \includegraphics{./figures/inst01_rnd_beta.pdf}
+    \includegraphics{./figures/inst01_rnd_beta.pdf}
     \caption{$ \beta = \{ 0, 2, 4, 6 \} $}
 \end{figure}
 
@@ -259,5 +247,26 @@ Różne wartości parametru $\beta$.
 \subsubsection{Grupa instancji 3}
 Różne wartości parametru $\alpha$.
 
+\begin{center}
+\begin{tabular}{|r|l|}
+  \hline
+  klasa instancji & losowa \\
+  liczba zadań & 50 \\
+  czasy operacji & $ \langle 5;100 \rangle $  \\
+  liczba mrówek & 10 \\
+  liczba pokoleń & 5000 \\
+  $ \rho $ & 0.01 \\
+  $ \beta $ & 2 \\
+  $ q_0 $ & 0.8 \\
+  $ \tau_0 $ & 0.001 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{./figures/inst01_rnd_beta.pdf}
+    \caption{$ \alpha = \{ 0.1, 0.25, 0.5, 0.75 \} $}
+\end{figure}
 
 \end{document}
