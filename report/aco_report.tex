@@ -6,6 +6,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{epsf} 
 \nonstopmode
 
 \title{Flow-Shop Scheduling\\Laboratorium Optymalizacji Kombinatorycznej}
@@ -37,21 +38,25 @@ za pomocą wzoru:
 operacji}}{\text{liczba\ maszyn}} \]
 
 \subsection{Program testujący}
+
 \subsubsection{Opis}
 Aplikacja została napisana w języku C i wykorzystuje biblioteki dostępne w
 systemach z rodziny GNU/Linux. 
+
 \subsubsection{Kompilacja}
 Kompilacja została zautomatyzowana przy pomocy programu GNU Make. Aby
-skompilować program należy z poziomu konsoli wydać polecenie \textit{make}.
-Prawidłowe zakończenie procesu kompilacji zostanie zasygnalizowane komunikatem
-\textit{Zakończono linkowanie!}.
+skompilować program należy przejść do katalogu \textit{scheduler} i z poziomu 
+konsoli wydać polecenie \textit{make}. Prawidłowe zakończenie procesu kompilacji 
+zostanie zasygnalizowane komunikatem \textit{Zakończono linkowanie!}. W ten sam
+sposób należy przebiega kompilacja programu \textit{generator}.
+
 \subsubsection{Uruchomienie}
 Praca aplikacji jest sterowana przez przełączniki powszechnie stosowane w
 oprogramowaniu linuksowym.  Przykładowe wywołanie \textit{scheduler -i
 inst\_name -o file\_name.csv} uruchomi program dla instancji zapisanej w pliku
 inst\_name i wykona algorytm ACO oraz losowy. Wynik szeregowania zostanie
-zwrócony do pliku o nazwie file\_name.csv.  Dodatkowo, aby uruchomić program
-generujący instancje należy użyć polecenia \./generator.\\ Przykładowe wywołanie
+zapisany do pliku o nazwie file\_name.csv.  Dodatkowo, aby uruchomić program
+generujący instancje należy użyć polecenia \textit{./generator}.\\ Przykładowe wywołanie:
 \textit{./generator -i input\_name -o inst\_name } spowoduje wygenerowanie pliku
 instancji inst\_name przyjmując parametry zawarte w pliku input\_name zgodnie ze
 schematem, że każda linia składa się z 5 liczb całkowitych, które odpowiednio
@@ -61,6 +66,7 @@ losuje czasy wykonania operacji i czasy gotowości dla zdefiniowanej liczby
 zadań.
 
 \section{Algorytm Ant Colony Optimization}
+
 \subsection{Opis algorytmu}
 Zastosowana przez nas metaheurystyka - Ant Colony Optimization - opiera się na
 naturalnym zachowaniu kolonii mrówek poszukujących pożywienia. Algorytm korzysta
@@ -71,25 +77,34 @@ Przystosowanie algorytmu do problemu szeregowania zadań sprowadza się w naszym
 przypadku do przedstawienia operacji danej instancji w postaci grafu, którego
 przykład umieszczono poniżej:\\
 \begin{center}
-    \includegraphics [scale=0.4]{./figures/pic01.png}\\
+    \includegraphics[scale=0.4]{./figures/pic01.png}\\
 \end{center}
-Każdemu wierzchołkowi grafu przyporządkowana jest jedna operacja, każda operacja zaś posiada informacje o maszynie i numerze zadania.
-Zależności pomiędzy kolejnością wykonania operacji reprezentują łuki między nimi, ponadto graf posiado dwa dodatkowe wierzchołki - początkowy i końcowy - które pozwalają przypisać pierwszej i ostatniej operacji feromon. Dzięki takiej reprezentacji problemu możemy korzystać z wzorów przeznaczonych dla algorytmu TSP z drobnymi modyfikacjami.
+Każdemu wierzchołkowi grafu przyporządkowana jest jedna operacja, każda
+operacja zaś posiada informacje o maszynie i numerze zadania.  Zależności
+pomiędzy kolejnością wykonania operacji reprezentują łuki między nimi, ponadto
+graf posiado dwa dodatkowe wierzchołki - początkowy i końcowy - które pozwalają
+przypisać pierwszej i ostatniej operacji feromon. Dzięki takiej reprezentacji
+problemu możemy korzystać z wzorów przeznaczonych dla algorytmu TSP z drobnymi
+modyfikacjami.
 
 Informacje o ilości feromonów utrzymywane są w macierzy NxN (N - liczba
-operacji). 
-Rozwiązaniem generowanym przez mrówkę jest łańcuch wszystkich wierzchołków zachowujący zależnosci między operacjami w zadaniu.
-(sortowanie topologiczne) Przykładowy łańcuch: [0 1 4 2 7 5 8 3 6 9 10].
+operacji).  Rozwiązaniem generowanym przez mrówkę jest łańcuch wszystkich
+wierzchołków zachowujący zależnosci między operacjami w zadaniu.  (sortowanie
+topologiczne) Przykładowy łańcuch: [0 1 4 2 7 5 8 3 6 9 10].
 
-Przed uruchomieniam właściwego algorytmu, początkowa ilość feromonu na każdej ścieżce przyjmuje bardzo małą wartość, w naszej implementacji przyjęliśmy $ \tau_0 = 0.001 $ 
+Przed uruchomieniam właściwego algorytmu, początkowa ilość feromonu na każdej
+ścieżce przyjmuje bardzo małą wartość, w naszej implementacji przyjęliśmy $
+\tau_0 = 0.001 $ 
 
 \subsubsection{State Transition Rule}
-Każda mrówka wybierając drogę stosuję regułę zmiany stanu (State Transition Rule), którą obrazuje poniższy wzór:\\
-%wzory do wklejenia
+Każda mrówka wybierając drogę stosuję regułę zmiany stanu (State Transition
+Rule), którą obrazuje poniższy wzór:\\
+
 \begin{equation}
  s = \left\{ 
   \begin{array}{l l}
-    arg\ max_{u \in J(r)} \{ [\tau (r,u)] \cdot [\eta (r,u)^\beta] \} , & \quad \text{jeśli $q\leq q_0$}\\
+    arg\ max_{u \in J(r)} \{ [\tau (r,u)] \cdot [\eta (r,u)^\beta] \} , & \quad
+    \text{jeśli $q\leq q_0$}\\
     S, & \quad \text{w przeciwnym razie}
   \end{array} \right.
 \end{equation} \\
@@ -98,11 +113,14 @@ gdzie:
   \item $ (r,u) $ - łuk od wierzchołka r do u
   \item $ J(r) $ - zbiór wierzchołków dostępnych w punkcie decyzyjnym r
   \item $ \tau (r,u) $ - ilość feromonu na łuku (r,u)
-  \item $ \eta (r,u) $ - atrakcyjność łuku (r,u), która w przypadku naszego problemu zdefiniowana jest jako odwrotność długości operacji u
+  \item $ \eta (r,u) $ - atrakcyjność łuku (r,u), która w przypadku naszego
+    problemu zdefiniowana jest jako odwrotność długości operacji u
   \item $ \beta $ - parametr kontrolujący wpływ atrakcyjności
   \item $ q $ - losowa liczba z przedziału $ \langle 0;1 \rangle $ 
-  \item $ q_0 $ - zdefiniowany parametr przyjmujący wartości z przedziału $ \langle 0;1 \rangle $
-  \item $ S $ - zmienna losowa wybierana zgodnia z rozkładem prawdopodobieństwa opisanym wzorem (2). 
+  \item $ q_0 $ - zdefiniowany parametr przyjmujący wartości z przedziału $
+    \langle 0;1 \rangle $
+  \item $ S $ - zmienna losowa wybierana zgodnia z rozkładem prawdopodobieństwa
+    opisanym wzorem (2). 
 \end{itemize}
 \\
 \begin{equation}
@@ -115,19 +133,26 @@ gdzie:
   \end{array} \right.
 \end{equation}
 
-Powyższa metoda wyboru nosi nazwę pseudoruletki, której zasada działania opiera się na przydzieleniu wartości procentowej koła ruletki, odpowiadającej iloczynowi ilości feromonu i atrakcyjności. Po zakręceniu kołem, które jest równoważne wylosowaniu liczby, wybierany jest następny wierzchołek na drodze mrówki.
+Powyższa metoda wyboru nosi nazwę pseudoruletki, której zasada działania opiera
+się na przydzieleniu wartości procentowej koła ruletki, odpowiadającej
+iloczynowi ilości feromonu i atrakcyjności. Po zakręceniu kołem, które jest
+równoważne wylosowaniu liczby, wybierany jest następny wierzchołek na drodze
+mrówki.
 
 \subsubsection{Aktualizacja wartości feromonów}
 W algorytmie stosujemy dwie strategie aktualizacji feromonów: \\
 \begin{enumerate}
-  \item lokalna (local updating rule) - w czasie konstruowania ścieżki mrówka modyfikuje ilosć feromonu stosując się do poniższego wzoru:\\
+  \item lokalna (local updating rule) - w czasie konstruowania ścieżki mrówka
+    modyfikuje ilosć feromonu stosując się do poniższego wzoru:\\
   \[ \tau (r,s) \leftarrow (1 - \rho) \cdot \tau (r,s) + \rho \cdot \tau_0  \] \\
   gdzie:
   \begin{itemize}
   \item $ \rho $ - współczynnik parowania feromonu (z przedziału $ (0;1) $)
 \end{itemize}
 
-  \item globalna (global updating rule) - gdy wszystkie mrówki danej populacji dotrą do celu (osiągną końcowy wierzchołek grafu) wartość feromonu jest aktualizowana zgodnie ze wzorem:\\
+  \item globalna (global updating rule) - gdy wszystkie mrówki danej populacji
+    dotrą do celu (osiągną końcowy wierzchołek grafu) wartość feromonu jest
+    aktualizowana zgodnie ze wzorem:\\
    \[ \tau (r,s) \leftarrow (1 - \alpha) \cdot \tau (r,s) + \alpha \cdot \Delta \tau (r,s)  \] \\
   gdzie:
   \begin{itemize}
@@ -146,12 +171,15 @@ W algorytmie stosujemy dwie strategie aktualizacji feromonów: \\
 \end{enumerate}
 
 \subsection{Instancje testowe}
-Każda znajdująca się poniżej instancja sterowana jest następującymi parametrami: $ \rho, \alpha, q_0, \tau_0, \beta $.
-Klasy instancji podzieliliśmy na 4 grupy w zależności od rodzaju danych wejściowych: losowe, rosnące, malejące, v-kształtne.
+Każda znajdująca się poniżej instancja sterowana jest następującymi
+parametrami: $ \rho, \alpha, q_0, \tau_0, \beta $.  Klasy instancji
+podzieliliśmy na 4 grupy w zależności od rodzaju danych wejściowych: losowe,
+rosnące, malejące, v-kształtne.
 
-
+\newpage
 \subsubsection{Instancja 1}
 
+\begin{center}
 \begin{tabular}{|r|l|}
   \hline
   klasa instancji & losowa  \\
@@ -167,8 +195,7 @@ Klasy instancji podzieliliśmy na 4 grupy w zależności od rodzaju danych wejś
   \hline
 \end{tabular}
 
-\subsubsection{Instancja 2}
-
-
+\includegraphics{./figures/inst01_rnd_smooth.pdf}\\
+\end{center}
 
 \end{document}
