@@ -114,15 +114,17 @@ int main(int argc, char **argv) {
   float **global_results = malloc(iter_no * sizeof(float *));
   for(int i = 0; i < iter_no; i++) global_results[i] = malloc(4 * sizeof(float));
 
-  float beta[4] = { 0.0, 2.0, 4.0, 6.0 };
+//  float beta[4] = { 0.0, 2.0, 4.0, 6.0 };
+//  float alfa[5] = { 0.0, 0.1, 0.25, 0.5, 0.75 };
+    float ph_treshold[4] = { 0.0, 0.25, 0.5, 0.75 };
   for(int k = 0; k < 4; k++) {
 
     float **aco_results = malloc(iter_no * sizeof(float *));
     
     printf("ACO scheduling - %d iterations\n", iter_no);
     for(int i = 0; i < iter_avg; i++) {
-      printf("Avg: %d\n", i);
-      aco_results[i] = aco_scheduling(ants_no, iter_no, op_graph, op_array, op_no, jobs_no, beta[k]);
+      printf("Avg: %d-%d\n", k,i);
+      aco_results[i] = aco_scheduling(ants_no, iter_no, op_graph, op_array, op_no, jobs_no, ph_treshold[k]);
     }
 
     for(int i = 0; i < iter_no; i++) {

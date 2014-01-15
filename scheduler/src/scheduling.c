@@ -12,8 +12,8 @@ float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct o
   float ph_init = 0.001;
   float ph_decay = 0.1;
   float ph_evapor = 0.01;
-  float q_treshold = 0.8;
-  float atractiveness_factor = beta;
+  float q_treshold = beta;
+  float atractiveness_factor = 2.0;
 
   float **pheromone_array = malloc(op_graph->node_no * sizeof(float *));
   for(int i = 0; i < op_graph->node_no; i++) {
@@ -28,7 +28,8 @@ float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct o
 
 
   for(int iter = 0; iter < iter_no; iter++) {
-    printf("%d generacja\n", iter);
+    if(!iter%1000)
+      printf("%dk...\n", iter);
 
   int **solutions_array = malloc(ants_no * sizeof(int *));
   for(int i = 0; i < ants_no; i++) {
