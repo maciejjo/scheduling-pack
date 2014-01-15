@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{epsf} 
+\usepackage{float}
 \nonstopmode
 
 \title{Flow-Shop Scheduling\\Laboratorium Optymalizacji Kombinatorycznej}
@@ -196,37 +197,24 @@ Różne klasy instancji danych wejściowych.
 \end{tabular}
 \end{center}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics{./figures/inst01_rnd_smooth.pdf}
-    \caption{Losowe}
-\end{figure}
+\begin{center}
+\\
+\includegraphics{./figures/inst01_rnd_smooth.pdf}
+\caption{losowy}
 
-Wyczerpujący opis wykresu
+\includegraphics{./figures/inst02_asc_smooth.pdf}
+\caption{rosnący}
+\\
+\includegraphics{./figures/inst03_dsc_smooth.pdf}
+\caption{malejące}
+\\
+\includegraphics{./figures/inst04_vsh_smooth.pdf}
+\caption{v-kształtne}
+\\
+\end{center}
 
-
-\newpage
-\begin{figure}[h]
-    \centering
-    \includegraphics{./figures/inst02_asc_smooth.pdf}
-    \caption{Rosnące}
-\end{figure}
-
-\newpage
-\begin{figure}[h]
-    \centering
-    \includegraphics{./figures/inst03_dsc_smooth.pdf}
-    \caption{Malejące}
-\end{figure}
-
-
-\newpage
-\begin{figure}[h]
-    \centering
-    \includegraphics{./figures/inst04_vsh_smooth.pdf}
-    \caption{V-kształtne}
-\end{figure}
-
+Algorytm losowy, niezależnie od rodzaju danych wejściowych oraz ilości iteracji, osiąga średnio podobne wyniki. Jest to spowodowane brakiem poprawy algorytmu z upływem czasu. Natomiast ACO w kolejnych iteracjach zwraca wynik dążący do optimum.
+Metaheurystyka w zależności od klasy instancji zwraca wynik procentowo?
 
 \newpage
 \subsubsection{Grupa instancji 2}
