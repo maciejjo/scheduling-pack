@@ -177,12 +177,12 @@ podzieliliśmy na 4 grupy w zależności od rodzaju danych wejściowych: losowe,
 rosnące, malejące, v-kształtne.
 
 \newpage
-\subsubsection{Instancja 1}
+\subsubsection{Grupa instancji 1}
+Różne klasy instancji danych wejściowych.
 
 \begin{center}
 \begin{tabular}{|r|l|}
   \hline
-  klasa instancji & losowa  \\
   liczba zadań & 50 \\
   czasy operacji & $ \langle 5;100 \rangle $  \\
   liczba mrówek & 10 \\
@@ -194,8 +194,70 @@ rosnące, malejące, v-kształtne.
   $ \beta $ & 2 \\
   \hline
 \end{tabular}
-
-\includegraphics{./figures/inst01_rnd_smooth.pdf}\\
 \end{center}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{./figures/inst01_rnd_smooth.pdf}
+    \caption{Losowe}
+\end{figure}
+
+Wyczerpujący opis wykresu
+
+
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics{./figures/inst02_asc_smooth.pdf}
+    \caption{Rosnące}
+\end{figure}
+
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics{./figures/inst03_dsc_smooth.pdf}
+    \caption{Malejące}
+\end{figure}
+
+
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics{./figures/inst04_vsh_smooth.pdf}
+    \caption{V-kształtne}
+\end{figure}
+
+
+\newpage
+\subsubsection{Grupa instancji 2}
+Różne wartości parametru $\beta$.
+
+\begin{center}
+\begin{tabular}{|r|l|}
+  \hline
+  klasa instancji & losowa \\
+  liczba zadań & 50 \\
+  czasy operacji & $ \langle 5;100 \rangle $  \\
+  liczba mrówek & 10 \\
+  liczba pokoleń & 5000 \\
+  $ \rho $ & 0,01 \\
+  $ \alpha $ & 0,1 \\
+  $ q_0 $ & 0,8 \\
+  $ \tau_0 $ & 0,001 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[h]
+    \centering
+   % \includegraphics{./figures/inst01_rnd_beta.pdf}
+    \caption{$ \beta = \{ 0, 2, 4, 6 \} $}
+\end{figure}
+
+
+\newpage
+\subsubsection{Grupa instancji 3}
+Różne wartości parametru $\alpha$.
+
 
 \end{document}
