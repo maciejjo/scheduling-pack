@@ -28,6 +28,7 @@ float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct o
 
 
   for(int iter = 0; iter < iter_no; iter++) {
+    printf("%d generacja\n", iter);
 
   int **solutions_array = malloc(ants_no * sizeof(int *));
   for(int i = 0; i < ants_no; i++) {
@@ -36,7 +37,7 @@ float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct o
   int *cmax_array = malloc(ants_no * sizeof(int));
 
     for(int ant = 0; ant < ants_no; ant++) {
-    
+    printf("%d mrówka\n", ant);
       /*
       printf("Pheromones:\n");
       for(int i = 0; i < op_graph->node_no; i++) {
