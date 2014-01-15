@@ -14,7 +14,7 @@ OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm       = rm -f
 
 $(TARGET): $(OBJECTS)
-	@$(LINKER) $@ $(LFLAGS) $(OBJECTS)
+	@$(LINKER) $@ $(LFLAGS) $(OBJECTS) -lm
 	@echo "Zakończono linkowanie!"
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c

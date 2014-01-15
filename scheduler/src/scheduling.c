@@ -5,7 +5,7 @@
 #include "main.h"
 #include "scheduling.h"
 
-float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct operation **op_array, int op_no, int jobs_no) {
+float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct operation **op_array, int op_no, int jobs_no, float beta) {
 
 //  printf("ACO Scheduling\n");
 
@@ -13,7 +13,7 @@ float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct o
   float ph_decay = 0.1;
   float ph_evapor = 0.01;
   float q_treshold = 0.8;
-  float atractiveness_factor = 2.0;
+  float atractiveness_factor = beta;
 
   float **pheromone_array = malloc(op_graph->node_no * sizeof(float *));
   for(int i = 0; i < op_graph->node_no; i++) {
@@ -37,7 +37,6 @@ float *aco_scheduling(int ants_no, int iter_no, struct graph *op_graph, struct o
   int *cmax_array = malloc(ants_no * sizeof(int));
 
     for(int ant = 0; ant < ants_no; ant++) {
-    printf("%d mrówka\n", ant);
       /*
       printf("Pheromones:\n");
       for(int i = 0; i < op_graph->node_no; i++) {

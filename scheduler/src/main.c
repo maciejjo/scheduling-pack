@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
   srand(time(NULL));
   int ants_no = 10;
   int iter_no = 5000;
-  int iter_avg = 10;
+  int iter_avg = 3;
 
   int jobs_no;
 
@@ -93,6 +93,7 @@ int main(int argc, char **argv) {
     }
   }
   
+  /*
   float *rnd_results = malloc(iter_no * sizeof(int));
   printf("RND scheduling - %d iterations: ", iter_no);
   for(int i = 0; i < iter_no; i++) {
@@ -108,12 +109,31 @@ int main(int argc, char **argv) {
     rnd_results[i] = (float) result_sum / (float) iter_avg;
   }
   printf("\n");
+  */
 
-  float **aco_results = malloc(iter_no * sizeof(float *));
-  
-  printf("ACO scheduling - %d iterations\n", iter_no);
-  for(int i = 0; i < iter_avg; i++)
-    aco_results[i] = aco_scheduling(ants_no, iter_no, op_graph, op_array, op_no, jobs_no);
+  float **global_results = malloc(iter_no * sizeof(float *));
+  for(int i = 0; i < iter_no; i++) global_results[i] = malloc(4 * sizeof(float));
+
+  float beta[4] = { 0.0, 2.0, 4.0, 6.0 };
+  for(int k = 0; k < 4; k++) {
+
+    float **aco_results = malloc(iter_no * sizeof(float *));
+    
+    printf("ACO scheduling - %d iterations\n", iter_no);
+    for(int i = 0; i < iter_avg; i++) {
+      printf("Avg: %d\n", i);
+      aco_results[i] = aco_scheduling(ants_no, iter_no, op_graph, op_array, op_no, jobs_no, beta[k]);
+    }
+
+    for(int i = 0; i < iter_no; i++) {
+      float aco_avg = 0.0;
+      for(int j = 0; j < iter_avg; j++)
+        aco_avg += aco_results[j][i];
+      aco_avg /= (float) iter_avg;
+      global_results[i][k] = aco_avg;
+    }
+    free(aco_results);
+  }
 
   float ideal_cmax = 0.0;
   for(int i = 0; i < op_no; i++)
@@ -121,13 +141,13 @@ int main(int argc, char **argv) {
   ideal_cmax /= (float) NUMBER_OF_MACHINES;
 
 
-  for(int i = 0; i < iter_no; i++) {
-    float aco_avg = 0.0;
-    for(int j = 0; j < iter_avg; j++)
-      aco_avg += aco_results[j][i];
-    aco_avg /= (float) iter_avg;
 
-    fprintf(output_file, "%d,%.3f,%.3f,%.3f\n", i, aco_avg, rnd_results[i], ideal_cmax);
+  for(int i = 0; i < iter_no; i++) {
+    fprintf(output_file, "%d", i);
+    for(int j = 0; j < 4; j++) {
+    fprintf(output_file, ",%.3f", global_results[i][j]);
+    }
+    fprintf(output_file, ",%.3f\n", ideal_cmax);
   }
 
   // cleanup
@@ -135,7 +155,6 @@ int main(int argc, char **argv) {
   for(int i = 0; i < op_no; i++) {
     free(op_array[i]);
   }
-  free(aco_results);
   free(op_array);
   free(input_filename);
   fclose(input_file);
