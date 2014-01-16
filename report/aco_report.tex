@@ -455,12 +455,13 @@ Na podstawie badań przeprowadzonych przez Marco Dorigo - twórcę ACO - najleps
 \begin{figure}[h]
     \centering
     \includegraphics{./figures/inst_01_rnd_evapor_smooth.pdf}
-    \caption{$ \rho = \{ 0.0, 0.01, 0.02, 0.05, 0.1 \} $}
+    \caption{$ \rho = \{ 0.0, 0.005, 0.01, 0.02, 0.05, 0.1 \} $}
 \end{figure}
 \vspace{15mm}
 Współczynnik $\rho$ odpowiada za parowanie feromonu w akutalizacji lokalnej (wzór 4).
-Im mniejsza wartość parametru, tym algorytm zwraca korzystniejszy wynik.
-
+Im mniejsza wartość parametru, tym algorytm zwraca korzystniejszy wynik, co spowodowane jest doborem zbyt dużego 
+współczynnika $ \tau_0 $. Zbyt duża wartość współczynnika parowania, obniża jakość rozwiązania.
+W badanym przypadku wartość $\rho \leq 0.01$ zwraca zadowalające wyniki.
 
 \newpage
 \subsubsection{Różne wartości parametru liczby mrówek.}
@@ -488,12 +489,40 @@ Im mniejsza wartość parametru, tym algorytm zwraca korzystniejszy wynik.
 \end{figure}
 \vspace{15mm}
 W badanym przypadku, algorytm najlepiej zachowuje się dla liczby mrówek nie przekraczającej 20\% liczby zadań.
-Większa liczba mrówek zbyt szybko zatrzymuje poprawę algorytmu. 5 mrówek (10\% liczby zadań) osiąga najlepszą stabilizację, jednak jakość rozwiązania nie jest optymalna z punktu widzenia tego parametru.
+Większa liczba mrówek zbyt szybko hamuję poprawę wyników. 5 mrówek (10\% liczby zadań) osiąga najlepszą stabilizację, jednak 10 mrówek zwraca podobne wartości, jednak potrzebuje na to więcej iteracji, ponadto nie osiągając wyraźnej stabilizacji.
 
 \newpage
 \section{Ocena efektywności}
 Jednoznaczna ocena efektywności z punktu widzenia parametrów jest bardzo trudna, ponieważ zależą one od siebie.
-Zwiększając jeden parametr, rola innego może się zmniejszać. Zatem analiza każdego z wykresów pod kątem optymalnej wartości każdego parametru, a następnie zbiorcze zestawienie tych wartości i wysterowanie algorytmu, może zaskoczyć zwracając wynik poniżej naszych oczekiwań.
+Na podstawie wcześniejszych testów i analizy wygenerowanych wykresów, wykonaliśmy zestawienie wartości optymalnych, każdego z parametrów, następnie wprowadziliśmy te paramtry do algorytmu i zgodnie z oczekiwaniami, uzyskaliśmy najlepszą dotychczasową jakosć wyniku.
+
+\vspace{6 mm}
+\begin{center}
+\begin{tabular}{|r|l|}
+  \hline
+  klasa instancji & losowa \\
+  liczba zadań & 50 \\
+  czasy operacji & $ \langle 5;100 \rangle $  \\
+  liczba mrówek & 10\\
+  liczba pokoleń & 5000 \\
+  $ \rho $ & 0.005 \\
+  $ \tau_0 $ & 0.0001 \\
+  $ \beta $ & 0 \\
+  $ \alpha $ & 0.1 \\
+  $ q_0 $ & 0.75 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{./figures/inst_01_rnd_final_smooth.pdf}
+    \caption{optymalne wartości parametrów}
+\end{figure}
+
+\\
+Stosunek optimum do uzyskanej wartości wynosi $ \frac{2582.667}{2752.333} \approx 93.84\% $\\
+Zważywszy na szybkość osiągania stabilizacji oraz małą różnicę w stosunku do nierealnego optimum, wynik jest bardzo zadowalający.
 
 \section{Wnioski}
 Podsumowanie algorytmu
