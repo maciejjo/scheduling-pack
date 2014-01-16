@@ -364,6 +364,11 @@ W problemie FSP wyklucza się możliwość pominięcia jakiejkolwiek operacji, d
     \caption{$ \alpha = \{ 0.0, 0.1, 0.25, 0.5, 0.75 \} $}
 \end{figure}
 \vspace{15mm}
+Parametr $\alpha$ wpływa na zanik feromonów na wszystkich ścieżkach oraz przyrost na najlepszej ścieżce w globalnej aktualizacji (wzór 5). Dla wartości $\alpha = 0$ algorytm zachowuje się jak losowy, ponieważ nie są przyznawane "nagrody" za najlepszą ścieżkę.
+Wzrost wartości parametru zwiększa szybkość stabilizacji (nie optymalizacji).
+Parametr wielkośći $\alpha = 0.5$ daje w pierwszych kilkudziesięciu iteracjach wartość stablilną przy dobrym wyniku.
+Jednak zbytnie zwiększenie tego parametru ogranicza dalsze przeszukiwanie ścieżek, gdyż za bardzo zwiększa feromony na wcześnie odkrytych, dobrych ścieżkach.
+Przy parametrze $\alpha = {0.1, 0,25}$ algorytm zwraca wartość zbliżoną do wartości przy $\alpha = 0.5$, jednak czas jej osiągnięcia jest dłuższy i algorytm nie osiąga pełnej stabilności.
 
 
 \newpage
