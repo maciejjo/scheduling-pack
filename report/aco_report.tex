@@ -424,9 +424,13 @@ Potwierdzają to przeprowadzone testy, które wykazują lepsze wyniki dla parame
 \begin{figure}[h]
     \centering
     \includegraphics{./figures/inst_01_rnd_phinit_smooth.pdf}
-    \caption{$ \tau_0 = \{ 0.0, 0.001, 0.01, 0.05, 0.1 \} $}
+    \caption{$ \tau_0 = \{ 0.0, 0.0001, 0.0005, 0.001, 0.01, 0.05, 0.1 \} $}
 \end{figure}
-Kolejna wartość sterująca programem - parametr $\tau_0$ - oznacza początkową wartość feromonu pomiędzy każdą parą wierzchołków grafu. Gdy $\tau_0 = 0$ wówczas, zgodnie ze wzorem 4,5 i 6 feromon aktualizowany jest jedynie na najlepszej ścieżce.
+\vspace{15mm}
+Kolejna wartość sterująca programem - parametr $\tau_0$ - oznacza początkową wartość feromonu pomiędzy każdą parą wierzchołków grafu. Gdy $\tau_0 = 0$ wówczas, zgodnie ze wzorem 4,5 i 6 feromon aktualizowany jest jedynie na najlepszej ścieżce. Dlatego długość uszeregowania dla wszystkich operacji jest stała.
+Jakość rozwiązań rośnie wraz ze spadkiem współczynnika $\tau_0$.
+Na podstawie badań przeprowadzonych przez Marco Dorigo - twórcę ACO - najlepsze osiągi uzyskuje się przy $\tau_0 = \frac{1}{n \cdot L_{nn}}$ gdzie n to liczba operacji, a $L_{nn}$ to $C_{max}$ obliczony przez pokrewną metaheurystykę.
+
 
 
 \newpage
@@ -453,6 +457,9 @@ Kolejna wartość sterująca programem - parametr $\tau_0$ - oznacza początkow�
     \includegraphics{./figures/inst_01_rnd_evapor_smooth.pdf}
     \caption{$ \rho = \{ 0.0, 0.01, 0.02, 0.05, 0.1 \} $}
 \end{figure}
+\vspace{15mm}
+Współczynnik $\rho$ odpowiada za parowanie feromonu w akutalizacji lokalnej (wzór 4).
+Im mniejsza wartość parametru, tym algorytm zwraca korzystniejszy wynik.
 
 
 \newpage
@@ -479,13 +486,17 @@ Kolejna wartość sterująca programem - parametr $\tau_0$ - oznacza początkow�
     \includegraphics{./figures/inst_01_rnd_antno_smooth.pdf}
     \caption{liczba mrówek $= \{ 5, 10, 20, 40 \} $}
 \end{figure}
+\vspace{15mm}
+W badanym przypadku, algorytm najlepiej zachowuje się dla liczby mrówek nie przekraczającej 20\% liczby zadań.
+Większa liczba mrówek zbyt szybko zatrzymuje poprawę algorytmu. 5 mrówek (10\% liczby zadań) osiąga najlepszą stabilizację, jednak jakość rozwiązania nie jest optymalna z punktu widzenia tego parametru.
 
 \newpage
 \section{Ocena efektywności}
-Jakie parametry optymalne...
+Jednoznaczna ocena efektywności z punktu widzenia parametrów jest bardzo trudna, ponieważ zależą one od siebie.
+Zwiększając jeden parametr, rola innego może się zmniejszać. Zatem analiza każdego z wykresów pod kątem optymalnej wartości każdego parametru, a następnie zbiorcze zestawienie tych wartości i wysterowanie algorytmu, może zaskoczyć zwracając wynik poniżej naszych oczekiwań.
 
 \section{Wnioski}
-No sprawko jest piękne! :)
+Podsumowanie algorytmu
 
 
 \end{document}
