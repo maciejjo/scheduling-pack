@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{epsf} 
 \usepackage{float}
+\usepackage{booktabs}
 \nonstopmode
 
 \title{Flow-Shop Scheduling\\Laboratorium Optymalizacji Kombinatorycznej}
@@ -216,25 +217,25 @@ Różne klasy instancji danych wejściowych.
 Algorytm losowy, niezależnie od rodzaju danych wejściowych oraz ilości iteracji, osiąga średnio podobne wyniki. Jest to spowodowane brakiem poprawy algorytmu z upływem czasu. Natomiast ACO w kolejnych iteracjach zwraca wynik dążący do optimum.
 Metaheurystyka w zależności od klasy instancji zwraca wynik procentowo?
 
+\newpage
 \begin{tabular}{rrrll}
-%\toprule
+\toprule
 Iteracja & ACO & RND  & opt/ACO(\%) & opt/RND(\%) \\
-%\midrule
-
+\midrule
 50	& 3,796.33	& 4,294.33	& 68.03	& 60.14 \\
 1000	& 3,192.15	& 4,419.17	& 80.91	& 58.44 \\
 2000	& 3,089.85	& 4,388.67	& 83.59	& 58.85 \\
 3000	& 3,101.63	& 4,331.83	& 83.27	& 59.62 \\
 4000	& 3,077.53	& 4,458.83	& 83.92	& 57.92 \\
 5000	& 3,016.63	& 4,238.50	& 85.61	& 60.93 \\
-%\bottomrule
+\bottomrule
 \end{tabular}
 
 \begin{tabular}{rrrll}
 %opt 2510.333
 %\toprule
 Iteracja & ACO & ASC  & opt/ACO(\%) & opt/ASC(\%) \\
-%\midrule
+\midrule
 
 50	& 3,397.37	& 4,300.33	& 73.89 &	58.38\\
 1000	& 2,756.32	& 4,252.50 &	91.08 &	59.03\\
@@ -242,14 +243,14 @@ Iteracja & ACO & ASC  & opt/ACO(\%) & opt/ASC(\%) \\
 3000	& 2,757.55	& 4,448.83	& 91.03 &	56.43\\
 4000	& 2,757.02	& 4,457.83	& 91.05 &	56.31\\
 5000	& 2,755.25	& 4,126.83	& 91.11 &	60.83\\
-%\bottomrule
+\bottomrule
 \end{tabular}
 
 \begin{tabular}{rrrll}
 %opt 2528.667
 %\toprule
 Iteracja & ACO & DSC  & opt/ACO(\%) & opt/DSC(\%) \\
-%\midrule
+\midrule
 50	& 3,418.53	& 4,367.67	& 73.97 &	57.90\\
 1000	& 2,778.82	& 4,341.67	& 91.00 &	58.24\\
 2000	& 2,780.03	& 4,394.00	& 90.96 & 57.55\\
@@ -257,14 +258,14 @@ Iteracja & ACO & DSC  & opt/ACO(\%) & opt/DSC(\%) \\
 4000	& 2,770.00	& 4,411.33	& 91.29 &	57.32\\
 5000	& 2,774.88	& 4,333.50	& 91.13 &	58.35\\
 
-%\bottomrule
+\bottomrule
 \end{tabular}
 
 \begin{tabular}{rrrll}
 %opt 1348.333
 %\toprule
 Iteracja & ACO & VSH  & opt/ACO(\%) & opt/VSH(\%) \\
-%\midrule
+\midrule
 50	& 1,859.73	& 2,282.00	& 72.50 &	59.09\\
 1000	& 1,530.27	& 2,277.67	& 88.11 &	59.20\\
 2000	& 1,529.47	& 2,341.00 &	88.16 &	57.60\\
@@ -272,7 +273,7 @@ Iteracja & ACO & VSH  & opt/ACO(\%) & opt/VSH(\%) \\
 4000	& 1,529.55	& 2,340.17 &	88.15 &	57.62\\
 5000	& 1,527.00	& 2,268.83 & 88.30 &	59.43\\
 
-%\bottomrule
+\bottomrule
 \end{tabular}
 
 \newpage
