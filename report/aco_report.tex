@@ -392,11 +392,15 @@ Przy parametrze $\alpha = {0.1, 0,25}$ algorytm zwraca wartość zbliżoną do w
 
 \begin{figure}[h]
     \centering
-    \includegraphics{./figures/inst01_rnd_qinit_smooth.pdf}
+    \includegraphics{./figures/inst_01_rnd_q0_smooth.pdf}
     \caption{$ q_0 = \{ 0.0, 0.25, 0.5, 0.75 \} $}
 \end{figure}
-
-
+\vspace{15mm}
+Parametr $ q_0 $ wpływa na ruletkę - większa wartość oznacza częstsze korzystanie z ruletki.
+Przykładowa wartość $ q_0 = 0.8 $ oznacza użycie ruletki w średnio 80\% przypadków zgodnie ze wzorem 2.
+Przy zerowej wartości parametru nie ma poprawy jakości rozwiazań algorytmu, gdyż zawsze wybiera tę samą ścieżkę.
+Poprawa jakości rozwiązań rośnie wraz ze wzrostem wartości $ q_0 $, jednak zbyt duży wpływ ruletki powoduje spadek jakości rozwiązań.
+Potwierdzają to przeprowadzone testy, które wykazują lepsze wyniki dla parametru $ q_0 = 0.75 $ niż wartości $ q_0 = 0.9 $.
 
 \newpage
 \subsubsection{Różne wartości parametru $\tau_0$.}
@@ -422,6 +426,7 @@ Przy parametrze $\alpha = {0.1, 0,25}$ algorytm zwraca wartość zbliżoną do w
     \includegraphics{./figures/inst_01_rnd_phinit_smooth.pdf}
     \caption{$ \tau_0 = \{ 0.0, 0.001, 0.01, 0.05, 0.1 \} $}
 \end{figure}
+Kolejna wartość sterująca programem - parametr $\tau_0$ - oznacza początkową wartość feromonu pomiędzy każdą parą wierzchołków grafu. Gdy $\tau_0 = 0$ wówczas, zgodnie ze wzorem 4,5 i 6 feromon aktualizowany jest jedynie na najlepszej ścieżce.
 
 
 \newpage
