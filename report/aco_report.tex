@@ -9,21 +9,26 @@
 \usepackage{epsf} 
 \usepackage{float}
 \usepackage{booktabs}
+\usepackage[a4paper]{geometry}
 \nonstopmode
 
 \title{Flow-Shop Scheduling\\Laboratorium Optymalizacji Kombinatorycznej}
 
-\author{Szymon Gramza\\
-  szymon.gramza@student.put.poznan.pl
-\and
-  Maciej Sobkowski\\
-  maciej.sobkowski@student.put.poznan.pl
-\and
-  Prowadzący: Marcin Radom
-}
-
 \begin{document}
+\newgeometry{left=3cm, bottom=3cm, top=3cm}
 \maketitle
+\begin{center}
+\Large{Szymon Gramza}\\
+szymon.gramza@student.put.poznan.pl\\
+\vspace{4mm}
+\Large{Maciej Sobkowski}\\
+maciej.sobkowski@student.put.poznan.pl\\
+\vspace{5mm}
+\Large{Prowadzący: Marcin Radom}\\  
+\end{center}
+
+
+\vspace{10mm}
 \section{Wprowadzenie}
 \subsection{Opis problemu}
 Problem Flow-Shop jest problemem optymalizacji kobminatorycznej, który polega na
@@ -36,8 +41,9 @@ wykorzystaliśmy zainspirowaną zachowaniem się mrówek poszukujących pożywie
 metaheurystykę ACO\@. Algorytm mrówkowy będziemy porównywać z rozwiązaniem
 uzyskanym za pomocą algorytmów losowego oraz rozwiązaniem optymalnym obliczonym
 za pomocą wzoru: 
-\[ opt = \frac{\text{suma\ czasów\ wszystkich
-operacji}}{\text{liczba\ maszyn}} \]
+\begin{equation}
+  opt = \frac{\text{suma\ czasów\ wszystkich\ operacji}}{\text{liczba\ maszyn}}
+\end{equation}
 
 \subsection{Program testujący}
 
@@ -141,12 +147,13 @@ iloczynowi ilości feromonu i atrakcyjności. Po zakręceniu kołem, które jest
 równoważne wylosowaniu liczby, wybierany jest następny wierzchołek na drodze
 mrówki.
 
+\vspace{15mm}
 \subsubsection{Aktualizacja wartości feromonów}
 W algorytmie stosujemy dwie strategie aktualizacji feromonów: \\
 \begin{enumerate}
   \item lokalna (local updating rule) - w czasie konstruowania ścieżki mrówka
     modyfikuje ilosć feromonu stosując się do poniższego wzoru:\\
-  \[ \tau (r,s) \leftarrow (1 - \rho) \cdot \tau (r,s) + \rho \cdot \tau_0  \] \\
+  \begin{equation} \tau (r,s) \leftarrow (1 - \rho) \cdot \tau (r,s) + \rho \cdot \tau_0  \end{equation} \\
   gdzie:
   \begin{itemize}
   \item $ \rho $ - współczynnik parowania feromonu (z przedziału $ (0;1) $)
@@ -155,7 +162,7 @@ W algorytmie stosujemy dwie strategie aktualizacji feromonów: \\
   \item globalna (global updating rule) - gdy wszystkie mrówki danej populacji
     dotrą do celu (osiągną końcowy wierzchołek grafu) wartość feromonu jest
     aktualizowana zgodnie ze wzorem:\\
-   \[ \tau (r,s) \leftarrow (1 - \alpha) \cdot \tau (r,s) + \alpha \cdot \Delta \tau (r,s)  \] \\
+   \begin{equation} \tau (r,s) \leftarrow (1 - \alpha) \cdot \tau (r,s) + \alpha \cdot \Delta \tau (r,s)  \end{equation} \\
   gdzie:
   \begin{itemize}
   \item $ \alpha $ - parametr zaniku feromonu
@@ -172,13 +179,16 @@ W algorytmie stosujemy dwie strategie aktualizacji feromonów: \\
 \end{itemize}
 \end{enumerate}
 
+\vspace{15mm}
 \subsection{Instancje testowe}
 Każda znajdująca się poniżej instancja sterowana jest następującymi
 parametrami: $ \rho, \alpha, q_0, \tau_0, \beta $.  Klasy instancji
 podzieliliśmy na 4 grupy w zależności od rodzaju danych wejściowych: losowe,
 rosnące, malejące, v-kształtne.
 
-\newpage
+
+\newgeometry{left=3cm,top=15mm, bottom=2cm}
+%r\restoregeometry
 \subsubsection{Różne klasy instancji danych wejściowych.}
 \vspace{6 mm}
 \begin{center}
@@ -199,24 +209,35 @@ rosnące, malejące, v-kształtne.
 
 \begin{center}
 \includegraphics{./figures/inst01_rnd_smooth.pdf}
-\caption{losowy}
-\vspace{6 mm}
+\vspace{2 mm}
+\\losowy}
+\\
+\vspace{5mm}
 \includegraphics{./figures/inst02_asc_smooth.pdf}
-\caption{rosnący}
-\\
+\vspace{2 mm}
+\\rosnący
+
 \includegraphics{./figures/inst03_dsc_smooth.pdf}
-\caption{malejące}
+\vspace{2 mm}
+\\malejące
 \\
+\vspace{5mm}
 \includegraphics{./figures/inst04_vsh_smooth.pdf}
-\caption{v-kształtne}
+\vspace{2 mm}
+\\v-kształtne
+
 \end{center}
-\vspace{5 mm}
-Algorytm losowy, niezależnie od rodzaju danych wejściowych oraz ilości iteracji, osiąga średnio podobne wyniki. Jest to spowodowane brakiem poprawy algorytmu z upływem czasu. Natomiast ACO w kolejnych iteracjach zwraca wynik dążący do optimum.
-Metaheurystyka w zależności od klasy instancji zwraca wynik procentowo?
+\vspace{8 mm}
+Algorytm losowy, niezależnie od rodzaju danych wejściowych oraz ilości iteracji, osiąga średnio podobne wyniki (względna odległość od optimum). Jest to spowodowane brakiem parametrów optymalizujących algorytm losowy. 
+Natomiast ACO w kolejnych iteracjach zwraca wynik dążący do optimum. Z analizowanych klas instancji wyróżniają się dane losowe dla których po 5000 iteracji algorytm nie osiąga wyraźnej stabilizacji. Dla pozostałych zestawów danych po około 200 pokoleniach dochodzimy do stabilizacji algorytmu. Wynika to z uporządkowania pozostałych zestawów danych (rosnące/malejące długości kolejnych operacji).
 
 \newpage
+\begin{center}
+Liczbowe przedstawienie klas instancji
 \begin{tabular}{rrrll}
 \toprule
+\multicolumn{5}{c}{losowe dane}\\
+\midrule
 Iteracja & ACO & RND  & opt/ACO(\%) & opt/RND(\%) \\
 \midrule
 50	& 3,796.33	& 4,294.33	& 68.03	& 60.14 \\
@@ -230,8 +251,10 @@ Iteracja & ACO & RND  & opt/ACO(\%) & opt/RND(\%) \\
 
 \begin{tabular}{rrrll}
 %opt 2510.333
-%\toprule
-Iteracja & ACO & ASC  & opt/ACO(\%) & opt/ASC(\%) \\
+\toprule
+\multicolumn{5}{c}{rosnące dane}\\
+\midrule
+Iteracja & ACO & RND  & opt/ACO(\%) & opt/RND(\%) \\
 \midrule
 
 50	& 3,397.37	& 4,300.33	& 73.89 &	58.38\\
@@ -245,8 +268,10 @@ Iteracja & ACO & ASC  & opt/ACO(\%) & opt/ASC(\%) \\
 
 \begin{tabular}{rrrll}
 %opt 2528.667
-%\toprule
-Iteracja & ACO & DSC  & opt/ACO(\%) & opt/DSC(\%) \\
+\toprule
+\multicolumn{5}{c}{malejące dane}\\
+\midrule
+Iteracja & ACO & RND  & opt/ACO(\%) & opt/RND(\%) \\
 \midrule
 50	& 3,418.53	& 4,367.67	& 73.97 &	57.90\\
 1000	& 2,778.82	& 4,341.67	& 91.00 &	58.24\\
@@ -260,8 +285,10 @@ Iteracja & ACO & DSC  & opt/ACO(\%) & opt/DSC(\%) \\
 
 \begin{tabular}{rrrll}
 %opt 1348.333
-%\toprule
-Iteracja & ACO & VSH  & opt/ACO(\%) & opt/VSH(\%) \\
+\toprule
+\multicolumn{5}{c}{v-kształtne dane}\\
+\midrule
+Iteracja & ACO & RND  & opt/ACO(\%) & opt/RND(\%) \\
 \midrule
 50	& 1,859.73	& 2,282.00	& 72.50 &	59.09\\
 1000	& 1,530.27	& 2,277.67	& 88.11 &	59.20\\
@@ -272,6 +299,13 @@ Iteracja & ACO & VSH  & opt/ACO(\%) & opt/VSH(\%) \\
 
 \bottomrule
 \end{tabular}
+\end{center}
+
+\vspace{15mm}
+Powyższe tabelki obrazują stosunek wartości optimum do wartości $C_{max}$ w otoczeniach wybranych puntów $\langle numer\ iteracji - 50 ; numer\ iteracji + 50\rangle$, potwierdzając brak optymalizacji rozwiązania w przypadku algorytmu losowego, niezależnie od rodzaju danych wejścciowych.
+Zastosowana metaheurystyka natomiast w przypadku danych malejących, rosnących i v-kształtnych ma bardzo podobne osiągi bliskie 90\% wartości optymalnej.
+Dane losowe dają gorsze wyniki, osiągając ok. 85\% wartości optymalnej, co jest spowodowane naturą losowego rozkładu danych.
+
 
 \newpage
 \subsubsection{Różne wartości parametru $\beta$.}
@@ -297,7 +331,13 @@ Iteracja & ACO & VSH  & opt/ACO(\%) & opt/VSH(\%) \\
     \includegraphics{./figures/inst01_rnd_beta_smooth.pdf}
     \caption{$ \beta = \{ 0, 2, 4, 6 \} $}
 \end{figure}
-
+\vspace{15mm}
+Badany parametr $\beta$, wpływa na wagę atrakcyjności operacji ($\eta$), podczas wyboru następnego wierzchołka.
+W przeprowadzonym teście algorytm zwraca najlepsze osiągi dla wartości $\beta = 0$.
+Wraz ze wzrostem wartości tego parametru wyniki pogarszają się.
+Oznacza to, że nie branie pod uwagę atrakcyjności poprawia efektywność algorytmu.
+Jest to spowodowane tym, że algorytm ACO został zaprojektowany dla problemu TSP w którym uzyskanie rozwiązania nie wymusza odwiedzenia wszystkich krawędzi grafu, zatem wybieranie tych o małym koszcie sprzyja lepszym rozwiązaniom.
+W problemie FSP wyklucza się możliwość pominięcia jakiejkolwiek operacji, dlatego wybieranie najpierw krótszych, nie sprzyja lepszym rozwiązaniom, a jedynie utrudnia dobre uszeregowanie zadań.
 
 \newpage
 \subsubsection{Różne wartości parametru $\alpha$.}
@@ -323,6 +363,8 @@ Iteracja & ACO & VSH  & opt/ACO(\%) & opt/VSH(\%) \\
     \includegraphics{./figures/inst01_rnd_alpha_smooth.pdf}
     \caption{$ \alpha = \{ 0.0, 0.1, 0.25, 0.5, 0.75 \} $}
 \end{figure}
+\vspace{15mm}
+
 
 \newpage
 \subsubsection{Różne wartości parametru $q_0$.}
@@ -347,7 +389,7 @@ Iteracja & ACO & VSH  & opt/ACO(\%) & opt/VSH(\%) \\
     \centering
     \includegraphics{./figures/inst01_rnd_qinit_smooth.pdf}
     \caption{$ q_0 = \{ 0.0, 0.25, 0.5, 0.75 \} $}
-\end{figure}$ q_0 $ & 0.8 \\
+\end{figure}
 
 
 
