@@ -210,7 +210,7 @@ rosnące, malejące, v-kształtne.
 \begin{center}
 \includegraphics{./figures/inst01_rnd_smooth.pdf}
 \vspace{2 mm}
-\\losowy}
+\\losowy
 \\
 \vspace{5mm}
 \includegraphics{./figures/inst02_asc_smooth.pdf}
@@ -488,13 +488,19 @@ W badanym przypadku wartość $\rho \leq 0.01$ zwraca zadowalające wyniki.
     \caption{liczba mrówek $= \{ 5, 10, 20, 40 \} $}
 \end{figure}
 \vspace{15mm}
-W badanym przypadku, algorytm najlepiej zachowuje się dla liczby mrówek nie przekraczającej 20\% liczby zadań.
-Większa liczba mrówek zbyt szybko hamuję poprawę wyników. 5 mrówek (10\% liczby zadań) osiąga najlepszą stabilizację, jednak 10 mrówek zwraca podobne wartości, jednak potrzebuje na to więcej iteracji, ponadto nie osiągając wyraźnej stabilizacji.
+W badanym przypadku, algorytm najlepiej zachowuje się dla liczby mrówek nie
+przekraczającej 20\% liczby zadań.  Większa liczba mrówek zbyt szybko hamuję
+poprawę wyników. 5 mrówek (10\% liczby zadań) osiąga najlepszą stabilizację,
+jednak 10 mrówek zwraca podobne wartości, jednak potrzebuje na to więcej
+iteracji, ponadto nie osiągając wyraźnej stabilizacji.
 
 \newpage
 \section{Ocena efektywności}
-Jednoznaczna ocena efektywności z punktu widzenia parametrów jest bardzo trudna, ponieważ zależą one od siebie.
-Na podstawie wcześniejszych testów i analizy wygenerowanych wykresów, wykonaliśmy zestawienie wartości optymalnych, każdego z parametrów, następnie wprowadziliśmy te paramtry do algorytmu i zgodnie z oczekiwaniami, uzyskaliśmy najlepszą dotychczasową jakosć wyniku.
+Jednoznaczna ocena efektywności z punktu widzenia parametrów jest bardzo
+trudna, ponieważ zależą one od siebie.  Na podstawie wcześniejszych testów i
+analizy wygenerowanych wykresów, wykonaliśmy zestawienie wartości optymalnych,
+każdego z parametrów, następnie wprowadziliśmy te paramtry do algorytmu i
+zgodnie z oczekiwaniami, uzyskaliśmy najlepszą dotychczasową jakosć wyniku.
 
 \vspace{6 mm}
 \begin{center}
@@ -521,19 +527,31 @@ Na podstawie wcześniejszych testów i analizy wygenerowanych wykresów, wykonal
 \end{figure}
 \vspace{2cm}
 \\
-Stosunek optimum do uzyskanej wartości wynosi $ \frac{2582.667}{2752.333} \approx 93.84\% $\\
-Zważywszy na szybkość osiągania stabilizacji oraz małą różnicę w stosunku do nierealnego optimum, wynik jest bardzo zadowalający.
+Stosunek optimum do uzyskanej wartości wynosi $ \frac{2582.667}{2752.333}
+\approx 93.84\% $\\ Zważywszy na szybkość osiągania stabilizacji oraz małą
+różnicę w stosunku do nierealnego optimum, wynik jest bardzo zadowalający.
 
 \newpage
 \section{Wnioski}
-Algorytm ACO po odpowiednich modyfikacjach nadaje się do problemu FSP (Flow-shop Scheduling Problem), a po zastosowaniu odpowiednich parametrów zwraca zadowalające (ok. 95\% wartości optymalnej) wyniki.
-
+Algorytm ACO po odpowiednich modyfikacjach nadaje się do rozwiązywania problemu
+FSP (Flow-shop Scheduling Problem), a po dobraniu odpowiednich parametrów
+zwraca zadowalające (ok. 95\% wartości optymalnej) wyniki. Algorytm cechuje
+duża szybkość znajdowania optymalnego rozwiązania. Wadą algorytmu AMH jest
+wysoki stopień sparametryzowania, który powoduje, Ŝe wymaga on czasochłonnego
+procesu „dostrajania”.
 
 \vspace{2,5cm}
 \section{Bibliografia}
 \begin{enumerate}
-  \item pierwszy
-  \item drugi
+  \item Marco Dorigo, Thomas Stutzle, Ant Colony Optimization, 2004
+    Massachusetts Institute of Technology
+  \item Thomas Stützle, An Ant Approach to the Flow Shop Problem
+  \item Adam Kostrubiec, Zastosowanie algorytmu mrówkowego w harmonogramowaniu
+    produkcji przepływowej
+  \item Jun Zhang, Xiaomin Hu, X. Tan, J.H. Zhong and Q. Huang, Implementation
+    of an Ant Colony Optimization technique for job shop scheduling problem
+  \item http://www.scholarpedia.org/article/Ant\_colony\_optimization
+  \item http://en.wikipedia.org/wiki/Ant\_colony\_optimization\_algorithms
 \end{enumerate}
 
 \end{document}
